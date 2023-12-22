@@ -31,12 +31,10 @@ def get_json(image):
                     row = cell['row']
                 if len(table_data[cell["label"]])==row: continue
                 table_data[cell["label"]].append(cell["text"])
-                # print(table_data)
-            # return table_data 
         else:
             dict_data["label"].append(data["label"])
             dict_data["text"].append(data["ocr_text"])
-            # return dict_data
+
     return table_data, dict_data
 
 @app.route('/',  methods=['GET', 'POST'])
@@ -69,26 +67,6 @@ def extractindex():
         return render_template('index.html', table1=table_html1, table2=table_html2, active_section='ijasah')
     else:
         return render_template('index.html', result_text=None, active_section='ijasah')
-    
-@app.route('/extractiindex/',methods=['POST'])  
-def extractiindex():
-    if 'image' in request.files:
-        image_data = request.files['image'].read()
-        image_base64 = base64.b64encode(image_data)
-        dict_data = dict()
-        table_data = dict()
-        table_data, dict_data = get_json(image_base64)
-        
-        df = pd.DataFrame(table_data)
-        df2 = pd.DataFrame(dict_data)
-
-        table_html1 = df2.to_html(classes='data', index=False)
-        table_html2 = df.to_html(classes='data', index=False)
-        
-        return render_template('iindex.html', table1=table_html1, table2=table_html2, active_section='traskripnilai')
-    else:
-        return render_template('iindex.html', result_text=None, active_section='traskripnilai')
-
 
 if __name__ == '__main__':
   app.run(port=5000)
