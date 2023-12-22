@@ -62,8 +62,6 @@ def extractindex():
         
         df = pd.DataFrame(table_data)
         df2 = pd.DataFrame(dict_data)
-        print(df)
-        print(df2)
 
         table_html1 = df2.to_html(classes='data', index=False)
         table_html2 = df.to_html(classes='data', index=False)
@@ -83,8 +81,6 @@ def extractiindex():
         
         df = pd.DataFrame(table_data)
         df2 = pd.DataFrame(dict_data)
-        print(df)
-        print(df2)
 
         table_html1 = df2.to_html(classes='data', index=False)
         table_html2 = df.to_html(classes='data', index=False)
