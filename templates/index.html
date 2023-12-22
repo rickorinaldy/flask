@@ -1,9 +1,54 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Hello World</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netmarks 2 - OCR Nanonets Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sstyle.css') }}">
+</head>
+<body>
+    <div class="logo">
+        <img style="padding-left: 25px;padding-top: 10px;" width= 68% src="{{ url_for('static', filename='img/netmarks.png') }}" alt="Netmarks Indonesia Logo">
+    </div>
+    <div class="NamaPerusahaan">
+        <h1>OCR Nanonets Demo</h1>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="navbar">
+            <Nav>
+                <a ></a>Type Document :</a>
+                <a href="{{ url_for('ijasah') }}" {% if active_section == 'ijasah' %}class="active"{% endif %} onclick="showContent('ijasah')">Ijazah</a>
+                <a href="{{ url_for('traskripnilai') }}" {% if active_section == 'traskripnilai' %}class="active"{% endif %} onclick="showContent('traskripnilai')">Traskrip Nilai</a>
+            </Nav>
+        </div>
+        <div class="row">
+            <div class="column" id="inputColumn">
+                <br><br>
+                <form action="/extractindex/" method="post" enctype="multipart/form-data">
+                    <label for="fileInput" id="uploadButton">
+                        <h3>Enter Documents Ijazah : </h3>
+                        <img src="{{ url_for('static', filename='img/cloud-computing_6242035.png') }}" alt="Upload Icon" style="width: 85px; height: 85px;">
+                        <br>
+                        <input type="file" name="image" accept="image/*">
+                    </label>
+                    <br><br>
+                    <button type="submit" id="submitButton" value="Upload">Extract File</button>
+                </form>
+            </div>
+            <div class="column" id="outputColumn" style="overflow-x:auto;">
+                <div id="outputData" style="background-color: #f0f0f0; padding: 10px;",>
+                    <h2 class="placeholder">Result OCR</h2>
+                    {{ table1|safe }}
+                    <h2> </h2>
+                    {{ table2|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=".container2"></div>
+        <img src="{{ url_for('static', filename='img/Nanonets.png') }}" alt="Gambar" class="imageLogo1">
+        <img src="{{ url_for('static', filename='img/icraver.png') }}" alt="Gambar" class="imageLogo2">
+    </div>
+</body>
 </html>
